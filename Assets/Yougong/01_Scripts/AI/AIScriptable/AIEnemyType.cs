@@ -1,12 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum UnitType
-{
-    Human = 1,
-    Machine = 2,
-    Monste = 3
-}
+
 
 namespace AI
 {
