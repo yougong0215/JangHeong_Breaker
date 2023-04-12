@@ -1,29 +1,36 @@
+using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public struct Data
-{
-    public float MaxHp;
-    public float Speed;
-    public float Damage;
-    public float Range;
 
-}
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    public Data _data;
-    public NavMeshAgent _Agent;
+    public EnemySetting _data;
+    private NavMeshAgent _Agent;
 
-
+    private void Awake()
+    {
+        _Agent = GetComponent<NavMeshAgent>();
+        Init();
+    }
 
     public virtual void Move(Transform target)
     {
         _Agent.SetDestination(target.position);
     }
+    public virtual void Stop()
+    {
+        _Agent.SetDestination(transform.position);
+    }
 
-    public abstract void Init();
-    public abstract void Attack();
+    public virtual void Init()
+    {
+        _Agent.speed = _data.Speed;
+    }
+    public abstract void Attack(Transform target);
+
+    public abstract void Die();
 }

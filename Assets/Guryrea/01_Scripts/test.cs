@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class test : EnemyBase
 {
-
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform ShotPos;
     public override void Init()
     {
-        _data.Damage = 5f;
-        _data.MaxHp = 50f;
-        _data.MaxHp = 5f;
-        _data.Range = 15f;
+
     }
 
     // Start is called before the first frame update
@@ -25,8 +23,16 @@ public class test : EnemyBase
 
     }
 
-    public override void Attack()
+    public override void Attack(Transform target)
     {
-        Debug.Log("Attack");
+        gameObject.transform.LookAt(target);
+        var bulletOBJ = Instantiate(bullet, ShotPos.position, Quaternion.identity);
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 3f;
+        Debug.Log("Attack!");
+    }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
     }
 }
