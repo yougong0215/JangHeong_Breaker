@@ -10,7 +10,22 @@ namespace AI
     {
         [SerializeField] protected AIUnitMode _mode;
 
-        GameObject obj;
+        [SerializeField] GameObject obj;
+
+        protected virtual void Awake()
+        {
+            if(obj != null)
+            {
+                obj = Instantiate(obj, transform);
+                obj.transform.position = transform.position;
+            }
+        }
+
+        public bool ReturnObj()
+        {
+            return obj == null;
+        }
+
 
         public AIUnitMode Mode => _mode;
 
@@ -19,6 +34,17 @@ namespace AI
             this.obj = In;
             obj.transform.parent = transform;
             obj.transform.position = transform.position;
+            StartCoroutine(Batched());
+        }
+
+        IEnumerator Batched()
+        {
+            yield return new WaitUntil(() => ReturnObj());
+
+            Debug.Log($"{gameObject.name} 배치 가능");
+
+
+
         }
 
     }
