@@ -28,17 +28,10 @@ namespace AI
         [SerializeField] float _regenCost = 5;
 
 
-        bool _batchingAble = true;
+        bool _batchAble = false;
 
-        float _timer;
+        float _timer = 0.0f;
 
-        IEnumerator Start()
-        {
-
-            yield return new WaitUntil(() => _batchingAble);
-
-            
-        }
 
         private void Awake()
         {
@@ -79,6 +72,18 @@ namespace AI
                     AreaPos.Add(BatchPosition[i].GetComponent<AIArea>());
                 }
             }
+
+
+            _batchAble = true;
+        }
+
+        IEnumerator Start()
+        {
+            yield return new WaitUntil(() => _batchAble);
+
+            
+
+
         }
 
         private void Update()
@@ -87,16 +92,28 @@ namespace AI
 
             if(_timer > _batchSpeed)
             {
-                _batchingAble = true;
+                _batchAble = true;
+                _timer = 0;
             }
 
-            if(Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                GameObject obj = Instantiate( BatchigUnit._listOfEnemy[0].Object.gameObject);
-                BatchPos[0].Batching(obj);
-                BatchigUnit._listOfEnemy[0].count--;
+                AITestSelect();
             }
         }
+
+        private void AITestSelect()
+        {
+            GameObject obj = Instantiate(BatchigUnit._listOfEnemy[0].Object.gameObject);
+
+            BatchPos[0].Batching(obj);
+
+            BatchigUnit._listOfEnemy[0].count--;
+        }
+
+        
+
+
 
 
     }

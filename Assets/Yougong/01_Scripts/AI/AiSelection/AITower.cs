@@ -7,8 +7,9 @@ namespace AI
 
     public class AITower : AISelectPos
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _mode = AIUnitMode.BatchTower;
         }
 

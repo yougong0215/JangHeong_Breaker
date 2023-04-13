@@ -6,8 +6,9 @@ namespace AI
 {
     public class AIBatch : AISelectPos
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _mode = AIUnitMode.Batch;
         }
 
