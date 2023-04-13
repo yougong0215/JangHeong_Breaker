@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamage
 {
     enum State
     {
@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     // 적군이 이동할 목표물인 성
     [SerializeField] private Transform _castle;
     // 적군의 기본 정보
-    [SerializeField] private EnemyBase _base;
+    private EnemyBase _base;
     // 공격 가능한 대상을 판별하기 위한 레이어 마스크
     private float _curHP;
     private NavMeshAgent _Agent;
@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        _base = GetComponent<EnemyBase>();
         _curHP = _base._data.MaxHp;
         _base.Init();
         _state = State.move;
@@ -40,15 +41,22 @@ public class EnemyController : MonoBehaviour
     {
 
         // 공격 가능한 범위 내에 있고, 공격 쿨타임이 지났을 경우
-        if (IsAttackRange() && Time.time > _lastTime + _base._data.AttackCooltime && _state == State.move)
+        if (IsAttackRange())
         {
-            _base.Stop();
-            //Debug.Log("Aack!!!!");
-            // 현재 시간을 마지막 공격 시간으로 저장
-            _lastTime = Time.time;
-            // 가장 가까운 대상을 공격
-            _base.Attack(SetTarget());
-            StartCoroutine(ChangeToMove());
+            if (Time.time > _lastTime + _base._data.AttackCooltime && _state == State.move)
+            {
+                _base.Stop();
+                //Debug.Log("Aack!!!!");
+                // 현재 시간을 마지막 공격 시간으로 저장
+                _lastTime = Time.time;
+                // 가장 가까운 대상을 공격
+                _base.Attack(SetTarget());
+                StartCoroutine(ChangeToMove());
+            }
+        }
+        else
+        {
+            _state = State.move;
         }
 
         if (_state == State.move)
@@ -97,4 +105,10 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawSphere(transform.position, _base._data.Range);
     }
 
+    public void IDamage(float Damage)
+    {
+        _curHP -= Damage;
+        if (_curHP <= 0)
+            _base.Die();
+    }
 }

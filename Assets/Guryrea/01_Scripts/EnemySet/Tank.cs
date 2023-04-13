@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Tank : EnemyBase
 {
-    [SerializeField] private Transform tankGunPOS;
+    [SerializeField] private Transform _likeDick;
+    [SerializeField] private Transform _tankGunPOS;
     [SerializeField] private GameObject _bulletOBJ;
     public override void Attack(Transform target)
     {
-        gameObject.transform.LookAt(tankGunPOS.transform);
+        _likeDick.gameObject.transform.LookAt(target);
+        var bullet = Instantiate(_bulletOBJ, _tankGunPOS.position, Quaternion.identity);
+        bullet.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward, ForceMode.Impulse);
     }
 
     public override void Die()
@@ -16,15 +19,5 @@ public class Tank : EnemyBase
         throw new System.NotImplementedException();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
