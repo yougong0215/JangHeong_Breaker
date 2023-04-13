@@ -1294,6 +1294,7 @@ GameObject:
   - component: {fileID: 6199972055894293540}
   - component: {fileID: 6199972055894293543}
   - component: {fileID: 6199972055894293541}
+  - component: {fileID: 6199972055894293544}
   m_Layer: 0
   m_Name: BoxTank
   m_TagString: Untagged
@@ -1418,3 +1419,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _castle: {fileID: 0}
   _base: {fileID: 0}
+--- !u!114 &6199972055894293544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6199972055894122500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2999c06f25df04e40b338a5e6301815a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _enemyLay:
+      serializedVersion: 2
+      m_Bits: 0
+    MaxHp: 0
+    Speed: 0
+    Damage: 0
+    AttackCooltime: 0
+    Range: 0
+    Cost: 0
+  tankGunPOS: {fileID: 0}
+  _bulletOBJ: {fileID: 0}
