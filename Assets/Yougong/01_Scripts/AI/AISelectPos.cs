@@ -8,14 +8,17 @@ namespace AI
 
     public abstract class AISelectPos : MonoBehaviour
     {
-        [SerializeField] AIUnitMode _mode;
+        [SerializeField] protected AIUnitMode _mode;
 
+        GameObject obj;
 
         public AIUnitMode Mode => _mode;
 
-        public void Batching(GameObject obj)
+        public void Batching(GameObject In)
         {
-
+            this.obj = In;
+            obj.transform.parent = transform;
+            obj.transform.position = transform.position;
         }
 
     }
