@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AIArea : MonoBehaviour
+namespace AI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AIArea : AISelectPos
     {
-        
-    }
+        private void Awake()
+        {
+            _mode = AIUnitMode.AreaUnit;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

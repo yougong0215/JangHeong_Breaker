@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AIBatch : MonoBehaviour
+using AI;
+namespace AI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AIBatch : AISelectPos
     {
-        
-    }
+        private void Awake()
+        {
+            _mode = AIUnitMode.Batch;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AITower : MonoBehaviour
+namespace AI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class AITower : AISelectPos
     {
-        
+        private void Awake()
+        {
+            _mode = AIUnitMode.BatchTower;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }
