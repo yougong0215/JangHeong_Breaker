@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
         move,
         attack
     };
+
     // 적군이 이동할 목표물인 성
     [SerializeField] private Transform _castle;
     // 적군의 기본 정보
