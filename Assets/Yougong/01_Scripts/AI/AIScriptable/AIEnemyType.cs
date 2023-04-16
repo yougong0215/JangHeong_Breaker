@@ -21,7 +21,7 @@ namespace AI
             [System.NonSerialized] public UnitType _unit;
             [SerializeField] public AIUnitMode Mode;
 
-            [SerializeField] public List<Enemy> _listOfEnemy = null;
+            [SerializeField] public List<Enemy> ListOfEnemy = null;
 
         }
     }

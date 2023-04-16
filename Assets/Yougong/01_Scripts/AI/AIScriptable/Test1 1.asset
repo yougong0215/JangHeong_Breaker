@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0353c68966288140a2f0b2bbf3c12ce, type: 3}
-  m_Name: twinkies
+  m_Name: Test1 1
   m_EditorClassIdentifier: 
-  unitType: 1
+  unitType: 0
   _enemyLay:
     serializedVersion: 2
-    m_Bits: 8
-  MaxHp: 50
+    m_Bits: 0
+  MaxHp: 0
   Ammor: 0
-  Speed: 3
-  Combatpower: 0
-  Damage: 5
-  AttackCooltime: 5
-  Range: 3
-  Cost: 15
+  Speed: 0
+  Combatpower: 300
+  Damage: 0
+  AttackCooltime: 0
+  Range: 0
+  Cost: 0

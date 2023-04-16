@@ -10,12 +10,16 @@ namespace AI
     public class AISelectManager : MonoBehaviour
     {
 
-        [Header("[ Read Only ]")]
+        [Header("[ Read Only - Obj Pos ]")]
         [SerializeField] List<AISelectPos> BatchPosition = null;
 
         [SerializeField] List<AIBatch> BatchPos = null;
         [SerializeField] List<AITower> TowerPos = null;
         [SerializeField] List<AIArea> AreaPos = null;
+
+        [Header("[ Read Only - Enemy ]")]
+        [SerializeField] List<EnemyBase> UseAbleList = null;
+        [SerializeField] List<EnemyBase> UsedList = null;
 
         [Header("[ ScriptableObject ]")]
         [SerializeField] AIEnemyType BatchigUnit;
@@ -26,6 +30,8 @@ namespace AI
         [SerializeField] float _cost = 100;
         [SerializeField] float _batchSpeed = 3;
         [SerializeField] float _regenCost = 5;
+
+
 
 
         bool _batchAble = false;
@@ -104,11 +110,11 @@ namespace AI
 
         private void AITestSelect()
         {
-            GameObject obj = Instantiate(BatchigUnit._listOfEnemy[0].Object.gameObject);
+            GameObject obj = Instantiate(BatchigUnit.ListOfEnemy[0].Object.gameObject);
 
             BatchPos[0].Batching(obj);
 
-            BatchigUnit._listOfEnemy[0].count--;
+            BatchigUnit.ListOfEnemy[0].count--;
         }
 
         

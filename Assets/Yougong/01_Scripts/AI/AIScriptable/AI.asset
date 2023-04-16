@@ -16,3 +16,7 @@ MonoBehaviour:
   _listOfEnemy:
   - Object: {fileID: 1882678712085795372, guid: 7e323202f0a390d4fbf0915537acc54d, type: 3}
     count: 1
+  - Object: {fileID: 1882678712085795372, guid: 36c15916e03881444aa8b993f9cba325, type: 3}
+    count: 1
+  - Object: {fileID: 1882678712085795372, guid: 036ebd9e7609d5d4db00be0212073fd6, type: 3}
+    count: 1
