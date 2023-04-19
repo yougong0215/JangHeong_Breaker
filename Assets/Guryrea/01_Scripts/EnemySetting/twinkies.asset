@@ -17,9 +17,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   MaxHp: 50
-  Ammor: 0
+  Ammor: 10
   Speed: 3
   Damage: 5
   AttackCooltime: 5
   Range: 3
-  Cost: 15
+  Cost: 2
+  Combatpower: 0

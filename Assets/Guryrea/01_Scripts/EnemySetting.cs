@@ -10,9 +10,12 @@ public class EnemySetting : ScriptableObject
     public float MaxHp;
     public float Ammor;
     public float Speed;
-    public float Combatpower;
     public float Damage;
     public float AttackCooltime;
     public float Range;
     public float Cost;
+
+    [Space]
+    [Header("전투력")]
+    public float Combatpower;
 }

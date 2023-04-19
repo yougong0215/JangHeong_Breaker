@@ -14,9 +14,10 @@ public class EnemyController : MonoBehaviour, IDamage
     // 적군이 이동할 목표물인 성
     [SerializeField] private Transform _castle;
     // 적군의 기본 정보
-    private EnemyBase _base;
+    [SerializeField] private EnemyBase _base;
     // 공격 가능한 대상을 판별하기 위한 레이어 마스크
     private float _curHP;
+    private float _ammor;
     private NavMeshAgent _Agent;
 
     // 충돌한 대상을 저장할 배열
@@ -28,30 +29,35 @@ public class EnemyController : MonoBehaviour, IDamage
 
     State _state;
 
-    private void Awake()
+    private void Start()
     {
-        _base = GetComponent<EnemyBase>();
+        //_base = GetComponent<EnemyBase>();
+        _ammor = _base._data.Ammor;
         _curHP = _base._data.MaxHp;
         _base.Init();
         _state = State.move;
+
+        Debug.Log(_base._data.Ammor);
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         // 공격 가능한 범위 내에 있고, 공격 쿨타임이 지났을 경우
         if (IsAttackRange())
         {
-            if (Time.time > _lastTime + _base._data.AttackCooltime && _state == State.move)
+            _state = State.attack;
+            _base.Stop();
+
+            if (Time.time > _lastTime + _base._data.AttackCooltime)
             {
-                _base.Stop();
-                //Debug.Log("Aack!!!!");
+                Debug.Log("Aack!!!!");
                 // 현재 시간을 마지막 공격 시간으로 저장
                 _lastTime = Time.time;
                 // 가장 가까운 대상을 공격
                 _base.Attack(SetTarget());
-                StartCoroutine(ChangeToMove());
+                //StartCoroutine(ChangeToMove());
             }
         }
         else
@@ -107,7 +113,15 @@ public class EnemyController : MonoBehaviour, IDamage
 
     public void IDamage(float Damage)
     {
+        if (_base._data.Ammor > 0)
+        {
+            _ammor -= Damage;
+            return;
+        }
+
         _curHP -= Damage;
+
+
         if (_curHP <= 0)
             _base.Die();
     }

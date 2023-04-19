@@ -27,7 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     public virtual void Init()
     {
-        _Agent.speed = _data.Speed;
+        //_Agent.speed = _data.Speed;
     }
     public abstract void Attack(Transform target);
 
