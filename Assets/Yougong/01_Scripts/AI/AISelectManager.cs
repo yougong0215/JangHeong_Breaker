@@ -18,11 +18,14 @@ namespace AI
         [SerializeField] List<AIArea> AreaPos = null;
 
         [Header("[ Read Only - Enemy ]")]
-        [SerializeField] List<EnemyBase> UseAbleList = null;
-        [SerializeField] List<EnemyBase> UsedList = null;
 
-        [Header("[ ScriptableObject ]")]
-        [SerializeField] AIEnemyType BatchigUnit;
+        [SerializeField] List<EnemyBase> ToUsing = null;     // 3개 추려서 1번째 정렬에 사용
+        [SerializeField] List<EnemyBase> UseAbleList = null; // 쓸수 있는거 전투력 순으로 정렬
+        [SerializeField] List<EnemyBase> UsedList = null;    // 쓴거
+        
+
+        [Header("[ ScriptableObject ]")] // 예네의 EnemyData 추출행야됨
+        [SerializeField] AIEnemyType BatchigUnit; 
         [SerializeField] AIEnemyType TowerUnit;
         [SerializeField] AIEnemyType AreaUnit;
 
@@ -104,17 +107,31 @@ namespace AI
 
             if (Input.GetKeyDown(KeyCode.K))
             {
-                AITestSelect();
+
             }
         }
 
-        private void AITestSelect()
+        private void AISort()
         {
-            GameObject obj = Instantiate(BatchigUnit.ListOfEnemy[0].Object.gameObject);
+            List<AI.Enemy.Enemy> AllOfUnit = null;
+            AllOfUnit.AddRange(BatchigUnit.Retruning());
+            AllOfUnit.AddRange(TowerUnit.Retruning());
+            AllOfUnit.AddRange(AreaUnit.Retruning());
 
-            BatchPos[0].Batching(obj);
+            for(int i =AllOfUnit.Count-1; i > 0; i--)
+            { 
+                for(int j =0; j< i; j++)
+                {
+                    if (AllOfUnit[j].Object._data.Combatpower < AllOfUnit[j + 1].Object._data.Combatpower)
+                    {
+                        AI.Enemy.Enemy temp = AllOfUnit[j];
+                        AllOfUnit[j] = AllOfUnit[j + 1];
+                        AllOfUnit[j + 1] = temp;
+                    }
+                }
+            }
 
-            BatchigUnit.ListOfEnemy[0].count--;
+
         }
 
         

@@ -23,6 +23,17 @@ namespace AI
 
             [SerializeField] public List<Enemy> ListOfEnemy = null;
 
+            private void OnEnable()
+            {
+                   
+            }
+
+            public List<Enemy> Retruning()
+            {
+
+                return ListOfEnemy;
+            }
+
         }
     }
 
