@@ -5,8 +5,9 @@ namespace AI
 {
     public class AIArea : AISelectPos
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _mode = AIUnitMode.AreaUnit;
         }
 

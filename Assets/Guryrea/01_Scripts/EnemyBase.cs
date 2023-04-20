@@ -14,7 +14,6 @@ public abstract class EnemyBase : MonoBehaviour
     private void Awake()
     {
         _Agent = GetComponent<NavMeshAgent>();
-        Init();
     }
 
     public virtual void Move(Transform target)
@@ -28,7 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     public virtual void Init()
     {
-        _Agent.speed = _data.Speed;
+        //_Agent.speed = _data.Speed;
     }
     public abstract void Attack(Transform target);
 
