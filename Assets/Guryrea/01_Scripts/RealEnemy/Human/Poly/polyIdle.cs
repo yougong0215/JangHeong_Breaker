@@ -6,7 +6,7 @@ public class polyIdle : Enemy, IState
 {
     public void OnStateEnter()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnStateExit()
@@ -18,6 +18,11 @@ public class polyIdle : Enemy, IState
         if (_state != EnemyState.attack)
         {
             _stateMachine.SetState(dicState[EnemyState.attack]);
+        }
+
+        if (!IsAttackRange())
+        {
+            _stateMachine.SetState(dicState[EnemyState.move]);
         }
     }
 }
