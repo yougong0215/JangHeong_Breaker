@@ -10,15 +10,22 @@ namespace AI
     public class AISelectManager : MonoBehaviour
     {
 
-        [Header("[ Read Only ]")]
+        [Header("[ Read Only - Obj Pos ]")]
         [SerializeField] List<AISelectPos> BatchPosition = null;
 
         [SerializeField] List<AIBatch> BatchPos = null;
         [SerializeField] List<AITower> TowerPos = null;
         [SerializeField] List<AIArea> AreaPos = null;
 
-        [Header("[ ScriptableObject ]")]
-        [SerializeField] AIEnemyType BatchigUnit;
+        [Header("[ Read Only - Enemy ]")]
+
+        [SerializeField] List<EnemyBase> ToUsing = null;     // 3개 추려서 1번째 정렬에 사용
+        [SerializeField] List<EnemyBase> UseAbleList = null; // 쓸수 있는거 전투력 순으로 정렬
+        [SerializeField] List<EnemyBase> UsedList = null;    // 쓴거
+        
+
+        [Header("[ ScriptableObject ]")] // 예네의 EnemyData 추출행야됨
+        [SerializeField] AIEnemyType BatchigUnit; 
         [SerializeField] AIEnemyType TowerUnit;
         [SerializeField] AIEnemyType AreaUnit;
 
@@ -26,6 +33,8 @@ namespace AI
         [SerializeField] float _cost = 100;
         [SerializeField] float _batchSpeed = 3;
         [SerializeField] float _regenCost = 5;
+
+
 
 
         bool _batchAble = false;
@@ -98,17 +107,31 @@ namespace AI
 
             if (Input.GetKeyDown(KeyCode.K))
             {
-                AITestSelect();
+
             }
         }
 
-        private void AITestSelect()
+        private void AISort()
         {
-            GameObject obj = Instantiate(BatchigUnit._listOfEnemy[0].Object.gameObject);
+            List<AI.Enemy.Enemy> AllOfUnit = null;
+            AllOfUnit.AddRange(BatchigUnit.Retruning());
+            AllOfUnit.AddRange(TowerUnit.Retruning());
+            AllOfUnit.AddRange(AreaUnit.Retruning());
 
-            BatchPos[0].Batching(obj);
+            for(int i =AllOfUnit.Count-1; i > 0; i--)
+            { 
+                for(int j =0; j< i; j++)
+                {
+                    if (AllOfUnit[j].Object._data.Combatpower < AllOfUnit[j + 1].Object._data.Combatpower)
+                    {
+                        AI.Enemy.Enemy temp = AllOfUnit[j];
+                        AllOfUnit[j] = AllOfUnit[j + 1];
+                        AllOfUnit[j + 1] = temp;
+                    }
+                }
+            }
 
-            BatchigUnit._listOfEnemy[0].count--;
+
         }
 
         
