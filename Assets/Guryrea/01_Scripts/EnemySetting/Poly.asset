@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0353c68966288140a2f0b2bbf3c12ce, type: 3}
   m_Name: Poly
   m_EditorClassIdentifier: 
-  unitType: 1
+  aIUnitMode: 0
   _enemyLay:
     serializedVersion: 2
     m_Bits: 8
@@ -21,6 +21,6 @@ MonoBehaviour:
   Speed: 5
   Damage: 15
   AttackCooltime: 8
-  Range: 10
+  Range: 2
   Cost: 5
   Combatpower: 2160

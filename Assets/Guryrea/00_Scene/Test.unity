@@ -286,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalPosition.y
@@ -347,8 +347,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774a4b997001d05449f8cfce46c6effd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _set: {fileID: 11400000, guid: 07d87342183352f47aa97b5b42773610, type: 2}
   _target: {fileID: 1254675978}
+  hit: []
+  _set: {fileID: 11400000, guid: 07d87342183352f47aa97b5b42773610, type: 2}
+  _ani: {fileID: 0}
+  _agent: {fileID: 0}
+  _stateMachine: {fileID: 0}
+  _state: 0
 --- !u!195 &456602755
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -461,7 +466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639705020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.13, y: 0.54, z: 1.12}
+  m_LocalPosition: {x: -7.27, y: 0.54, z: 0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
