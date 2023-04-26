@@ -11,3 +11,10 @@ public enum AIUnitMode
     AreaUnit = 3,
     NotSelect
 }
+
+public enum AIUnitType
+{
+    Guarder,
+    Dealer,
+    Suppoter
+}

@@ -45,7 +45,7 @@ namespace AI
         private void Awake()
         {
             BatchPos.Clear();
-            TowerPos.Clearr();
+            TowerPos.Clear();
             AreaPos.Clear();
             BatchPosition.Clear();
 
@@ -105,6 +105,14 @@ namespace AI
                 _timer = 0;
             }
         }
+
+        // 뱅가드 먼저 < = 마나 수급
+        // 스나이퍼    < = 주로 윗쪽 배치
+        // 마법사      < = 주로 윗쪽 배치
+        // 디팬더      < = ㅈㄴ 탱커임
+        // 가더        < = 데미지 높은 딜러
+        // 스페셜리스트 < = 맵기믹 이용하는 친구
+        // 서폿        < = 버프 디버프
 
 
 
