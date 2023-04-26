@@ -19,13 +19,13 @@ namespace AI
 
         [Header("[ Read Only - Enemy ]")]
 
-        [SerializeField] List<EnemyBase> ToUsing = null;     // 3°³ Ãß·Á¼­ 1¹øÂ° Á¤·Ä¿¡ »ç¿ë
-        [SerializeField] List<EnemyBase> UseAbleList = null; // ¾µ¼ö ÀÖ´Â°Å ÀüÅõ·Â ¼øÀ¸·Î Á¤·Ä
-        [SerializeField] List<EnemyBase> UsedList = null;    // ¾´°Å
-        
+        [SerializeField] List<EnemyBase> ToUsing = null;     // 3ï¿½ï¿½ ï¿½ß·ï¿½ï¿½ï¿½ 1ï¿½ï¿½Â° ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½
+        [SerializeField] List<EnemyBase> UseAbleList = null; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        [SerializeField] List<EnemyBase> UsedList = null;    // ï¿½ï¿½ï¿½ï¿½
 
-        [Header("[ ScriptableObject ]")] // ¿¹³×ÀÇ EnemyData ÃßÃâÇà¾ßµÊ
-        [SerializeField] AIEnemyType BatchigUnit; 
+
+        [Header("[ ScriptableObject ]")] // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ EnemyData ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½
+        [SerializeField] AIEnemyType BatchigUnit;
         [SerializeField] AIEnemyType TowerUnit;
         [SerializeField] AIEnemyType AreaUnit;
 
@@ -45,21 +45,21 @@ namespace AI
         private void Awake()
         {
             BatchPos.Clear();
-            TowerPos.Clearr();
+            TowerPos.Clear();
             AreaPos.Clear();
             BatchPosition.Clear();
 
-            if(BatchigUnit.Mode != AIUnitMode.Batch)
+            if (BatchigUnit.Mode != AIUnitMode.Batch)
             {
-                Debug.Log("ÇØ´ç Å¸ÀÔÀº [AIUnitMode.Batch] Å¸ÀÔÀÌ ¾Æ´Ô");
+                Debug.Log("ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ [AIUnitMode.Batch] Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½");
             }
             if (BatchigUnit.Mode != AIUnitMode.BatchTower)
             {
-                Debug.Log("ÇØ´ç Å¸ÀÔÀº [AIUnitMode.BatchTower] Å¸ÀÔÀÌ ¾Æ´Ô");
+                Debug.Log("ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ [AIUnitMode.BatchTower] Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½");
             }
             if (BatchigUnit.Mode != AIUnitMode.AreaUnit)
             {
-                Debug.Log("ÇØ´ç Å¸ÀÔÀº [AIUnitMode.AreaUnit] Å¸ÀÔÀÌ ¾Æ´Ô");
+                Debug.Log("ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ [AIUnitMode.AreaUnit] Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½");
             }
 
 
@@ -90,7 +90,7 @@ namespace AI
         {
             yield return new WaitUntil(() => _batchAble);
 
-            
+
 
 
         }
@@ -99,7 +99,7 @@ namespace AI
         {
             _timer += Time.deltaTime;
 
-            if(_timer > _batchSpeed)
+            if (_timer > _batchSpeed)
             {
                 _batchAble = true;
                 _timer = 0;

@@ -11,7 +11,13 @@ namespace PolyState
         {
             Debug.Log("Poly : Attack");
             _enemy._ani.SetTrigger("Attack");
+            var target = _enemy.SetTarget().GetComponent<IDamage>();
 
+            if (target != null)
+            {
+                target.IDamage(_enemy._set.Damage);
+            }
+            _enemy.ChangeState(Enemy.EnemyState.idle);
         }
 
         public override void OnStateExit(Enemy _enemy)
@@ -23,12 +29,6 @@ namespace PolyState
         {
 
         }
-
-        private IEnumerator ChangeToIdle(Enemy _enemy)
-        {
-            yield return new WaitForSeconds(2f);
-            _enemy.ChangeState(Enemy.EnemyState.idle);
-        }
     }
 
     public class idle : IState
@@ -36,8 +36,9 @@ namespace PolyState
         private float _lastAttack;
         public override void OnStateEnter(Enemy _enemy)
         {
-            _enemy._ani.SetBool("IsRange", false);
             Debug.Log("Poly : idle");
+            _enemy._ani.SetBool("IsRange", false);
+            _enemy.AgentStop();
         }
 
         public override void OnStateExit(Enemy _enemy)
@@ -75,6 +76,8 @@ namespace PolyState
 
         public override void OnStateUpdate(Enemy _enemy)
         {
+            if (_enemy.IsAttackRange())
+                _enemy.ChangeState(Enemy.EnemyState.idle);
         }
     }
 }

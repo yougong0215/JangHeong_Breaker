@@ -28,14 +28,16 @@ public class Enemy : MonoBehaviour, IDamage
 
     private void Awake()
     {
-        _currentHP = _set.MaxHp;
-
         _states = new IState[3];
         _states[(int)EnemyState.idle] = new PolyState.idle();
         _states[(int)EnemyState.move] = new PolyState.move();
         _states[(int)EnemyState.attack] = new PolyState.Attack();
 
         //currentState = _states[(int)EnemyState.idle];
+        _currentHP = _set.MaxHp;
+        _ani = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
+
         ChangeState((int)EnemyState.idle);
     }
 
