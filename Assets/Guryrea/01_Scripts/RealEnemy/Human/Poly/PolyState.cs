@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace PolyState
 {
@@ -8,35 +9,52 @@ namespace PolyState
     {
         public override void OnStateEnter(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Poly : Attack");
+            _enemy._ani.SetTrigger("Attack");
+
         }
 
         public override void OnStateExit(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override void OnStateUpdate(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+
+        }
+
+        private IEnumerator ChangeToIdle(Enemy _enemy)
+        {
+            yield return new WaitForSeconds(2f);
+            _enemy.ChangeState(Enemy.EnemyState.idle);
         }
     }
 
     public class idle : IState
     {
+        private float _lastAttack;
         public override void OnStateEnter(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+            _enemy._ani.SetBool("IsRange", false);
+            Debug.Log("Poly : idle");
         }
 
         public override void OnStateExit(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override void OnStateUpdate(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+            if (!_enemy.IsAttackRange())
+                _enemy.ChangeState(Enemy.EnemyState.move);
+
+            if (Time.time > _enemy._set.AttackCooltime + _lastAttack)
+            {
+                _lastAttack = Time.time;
+                _enemy.ChangeState(Enemy.EnemyState.attack);
+            }
         }
     }
 
@@ -44,17 +62,19 @@ namespace PolyState
     {
         public override void OnStateEnter(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Poly : move");
+
+            _enemy._ani.SetBool("IsRange", true);
+            _enemy.AgentGo();
         }
 
         public override void OnStateExit(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override void OnStateUpdate(Enemy _enemy)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

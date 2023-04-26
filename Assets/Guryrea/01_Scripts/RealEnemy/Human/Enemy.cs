@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamage
 {
     public enum EnemyState
     {
@@ -11,26 +11,32 @@ public class Enemy : MonoBehaviour
         move,
         attack
     };
-    public EnemySetting _set;
-    public float _rangeTest = 10f;
+
+    private float _currentHP;
     public Transform _target;
     public Collider[] hit;
-    public EnemyState _state;
-    public StateMachine _stateMachine;
+    public EnemySetting _set;
     public Animator _ani;
     public NavMeshAgent _agent;
 
 
+    public StateMachine _stateMachine;
+    public EnemyState _state;
     public IState[] _states;
     private IState currentState;
 
 
     private void Awake()
     {
+        _currentHP = _set.MaxHp;
+
         _states = new IState[3];
         _states[(int)EnemyState.idle] = new PolyState.idle();
         _states[(int)EnemyState.move] = new PolyState.move();
         _states[(int)EnemyState.attack] = new PolyState.Attack();
+
+        //currentState = _states[(int)EnemyState.idle];
+        ChangeState((int)EnemyState.idle);
     }
 
     public void Update()
@@ -71,14 +77,11 @@ public class Enemy : MonoBehaviour
     public void AgentStop()
     {
         _agent.SetDestination(transform.position);
-        _ani.SetBool("IsRange", false);
-
     }
 
     public void AgentGo()
     {
         _agent.SetDestination(_target.position);
-        _ani.SetBool("IsRange", true);
     }
 
     public void ChangeState(EnemyState newState)
@@ -98,5 +101,10 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, _set.Range);
+    }
+
+    public void IDamage(float Damage)
+    {
+        _currentHP -= Damage;
     }
 }
