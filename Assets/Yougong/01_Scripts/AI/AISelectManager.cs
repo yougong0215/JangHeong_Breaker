@@ -45,7 +45,7 @@ namespace AI
         private void Awake()
         {
             BatchPos.Clear();
-            TowerPos.Clear();
+            TowerPos.Clearr();
             AreaPos.Clear();
             BatchPosition.Clear();
 
@@ -104,12 +104,9 @@ namespace AI
                 _batchAble = true;
                 _timer = 0;
             }
-
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-
-            }
         }
+
+
 
         private void AISort()
         {
@@ -118,9 +115,9 @@ namespace AI
             AllOfUnit.AddRange(TowerUnit.Retruning());
             AllOfUnit.AddRange(AreaUnit.Retruning());
 
-            for(int i =AllOfUnit.Count-1; i > 0; i--)
-            { 
-                for(int j =0; j< i; j++)
+            for (int i = AllOfUnit.Count - 1; i > 0; i--)
+            {
+                for (int j = 0; j < i; j++)
                 {
                     if (AllOfUnit[j].Object._data.Combatpower < AllOfUnit[j + 1].Object._data.Combatpower)
                     {
@@ -134,7 +131,7 @@ namespace AI
 
         }
 
-        
+
 
 
 
