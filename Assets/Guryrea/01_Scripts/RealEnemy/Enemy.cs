@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamage
+public abstract class Enemy : StateMachine, IDamage
 {
     public enum EnemyState
     {
@@ -16,29 +16,28 @@ public class Enemy : MonoBehaviour, IDamage
     public Transform _target;
     public Collider[] hit;
     public EnemySetting _set;
-    public Animator _ani;
-    public NavMeshAgent _agent;
 
 
-    public StateMachine _stateMachine;
+    [HideInInspector] public Animator _ani;
+    [HideInInspector] public NavMeshAgent _agent;
+
+
+    //public StateMachine _stateMachine;
     public EnemyState _state;
     public IState[] _states;
     private IState currentState;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        _states = new IState[3];
-        _states[(int)EnemyState.idle] = new PolyState.idle();
-        _states[(int)EnemyState.move] = new PolyState.move();
-        _states[(int)EnemyState.attack] = new PolyState.Attack();
-
-        //currentState = _states[(int)EnemyState.idle];
         _currentHP = _set.MaxHp;
         _ani = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        //currentState = _states[(int)EnemyState.idle];
+    }
 
-        ChangeState((int)EnemyState.idle);
+    protected virtual void Start()
+    {
     }
 
     public void Update()
