@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Enemy : MonoBehaviour, IDamage
+public abstract class Enemy : PoolAble, IDamage
 {
     public enum EnemyState
     {
