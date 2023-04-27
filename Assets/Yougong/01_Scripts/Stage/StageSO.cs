@@ -3,16 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
-public struct SommonData
+public enum MonsterType
 {
-    public Vector2 Time;
-    
+    Jako,
+    Named,
+    Boss,
+    God,
+    JangHawon
 }
 
 
-[CreateAssetMenu(menuName ="sstd",  fileName = "Windows/StageSO")]
+[System.Serializable]
+public class EnemyData
+{
+    [Header("Object")]
+    public PoolAble Object;
+    [Header("Type")]
+    public MonsterType Type;
+    [Header("Revive")]
+    public float reviveTime;
+    [Header("SommonTime")]
+    public int FirstTime;
+    [Header("SommonArr")]
+    public int sommonCount; 
+    
+    
+}
+
+[System.Serializable]
+public class LineData
+{
+    public List<EnemyData> Enemy = null;
+}
+
+[System.Serializable]
+public class Pase
+{
+    public List<LineData> Line = null;
+}
+
+
+[CreateAssetMenu (fileName = "SO/StageData")]
 public class StageSO : ScriptableObject
 {
-    
+    public List<Pase> Game = null;
 }
