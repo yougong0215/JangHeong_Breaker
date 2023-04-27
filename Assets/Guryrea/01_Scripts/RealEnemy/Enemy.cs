@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Enemy : StateMachine, IDamage
+public abstract class Enemy : MonoBehaviour, IDamage
 {
     public enum EnemyState
     {
@@ -23,6 +23,7 @@ public abstract class Enemy : StateMachine, IDamage
 
 
     //public StateMachine _stateMachine;
+    [HideInInspector]
     public EnemyState _state;
     public IState[] _states;
     private IState currentState;
@@ -33,6 +34,7 @@ public abstract class Enemy : StateMachine, IDamage
         _currentHP = _set.MaxHp;
         _ani = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        _target = GameObject.Find("Castle").transform;
         //currentState = _states[(int)EnemyState.idle];
     }
 
@@ -46,6 +48,31 @@ public abstract class Enemy : StateMachine, IDamage
         {
             currentState.OnStateUpdate(this);
         }
+    }
+
+
+    public void ChangeState(EnemyState newState)
+    {
+        if (_states[(int)newState] == null) return;
+
+        if (currentState != null)
+        {
+            currentState.OnStateExit(this);
+        }
+
+        currentState = _states[(int)newState];
+        currentState.OnStateEnter(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, _set.Range);
+    }
+
+    public void IDamage(float Damage)
+    {
+        _currentHP -= Damage;
     }
 
     public bool IsAttackRange()
@@ -85,27 +112,8 @@ public abstract class Enemy : StateMachine, IDamage
         _agent.SetDestination(_target.position);
     }
 
-    public void ChangeState(EnemyState newState)
+    public void LookEnemy(Transform target)
     {
-        if (_states[(int)newState] == null) return;
-
-        if (currentState != null)
-        {
-            currentState.OnStateExit(this);
-        }
-
-        currentState = _states[(int)newState];
-        currentState.OnStateEnter(this);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, _set.Range);
-    }
-
-    public void IDamage(float Damage)
-    {
-        _currentHP -= Damage;
+        transform.LookAt(target, Vector3.up);
     }
 }

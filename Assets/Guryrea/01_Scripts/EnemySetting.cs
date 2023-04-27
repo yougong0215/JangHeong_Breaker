@@ -5,8 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/EnemySetting")]
 public class EnemySetting : ScriptableObject
 {
-    public AIUnitMode aIUnitMode;
-    public AIUnitType aIUnitType;
+    public UnitType unitType;
     public LayerMask _enemyLay;
     public float MaxHp;
     public float Ammor;

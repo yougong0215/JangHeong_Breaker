@@ -10,8 +10,8 @@ public class Poly : Enemy
     {
         base.Start();
         _states = new IState[3];
-        _states[(int)EnemyState.idle] = new PolyState.idle();
-        _states[(int)EnemyState.move] = new PolyState.move();
+        _states[(int)EnemyState.idle] = new PolyState.Idle();
+        _states[(int)EnemyState.move] = new PolyState.Move();
         _states[(int)EnemyState.attack] = new PolyState.Attack();
 
         ChangeState((int)EnemyState.idle);
