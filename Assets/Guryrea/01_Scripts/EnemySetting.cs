@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/EnemySetting")]
+[CreateAssetMenu(fileName = "SO/EnemySetting", menuName = "Stage")]
 public class EnemySetting : ScriptableObject
 {
-    public AIUnitMode aIUnitMode;
-    public AIUnitType aIUnitType;
     public LayerMask _enemyLay;
     public float MaxHp;
     public float Ammor;
