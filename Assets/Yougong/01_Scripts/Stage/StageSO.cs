@@ -34,11 +34,14 @@ public class EnemyData
 public class LineData
 {
     public List<EnemyData> Enemy = null;
+    public Transform SommonPos = null;
 }
 
 [System.Serializable]
 public class Pase
 {
+    [SerializeField] int _hp = 1000;
+    public int HP => _hp;
     public List<LineData> Line = null;
 }
 
@@ -46,5 +49,6 @@ public class Pase
 [CreateAssetMenu (fileName = "SO/StageData")]
 public class StageSO : ScriptableObject
 {
+
     public List<Pase> Game = null;
 }
