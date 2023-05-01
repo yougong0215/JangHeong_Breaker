@@ -15,9 +15,9 @@ MonoBehaviour:
   Game:
   - Line:
     - Enemy:
-      - Object: {fileID: 0}
+      - Object: {fileID: 1637889360303141715, guid: 7494ec7ae1151964d88746d640649d70, type: 3}
         Type: 0
-  - Line:
-    - Enemy:
-      - Object: {fileID: 0}
-        Type: 0
+        reviveTime: 4
+        FirstTime: 4
+        sommonCount: 50
+      SommonPos: {fileID: 0}

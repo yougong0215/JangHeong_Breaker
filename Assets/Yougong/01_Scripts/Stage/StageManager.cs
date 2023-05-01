@@ -44,13 +44,15 @@ public class StageManager : MonoBehaviour, IDamage
                 }
             }
         }
+
+        SommonStart();
     }
 
 
 
     private void Update()
     {
-        if(((float)HP/(float)MaxHP) * 100 <= PasePerCent[PaseCount])
+        if(((float)HP/(float)MaxHP) * 100 <= PasePerCent[PaseCount-1])
         {
             SommonStart();
         }
@@ -59,17 +61,19 @@ public class StageManager : MonoBehaviour, IDamage
     void SommonStart()
     {
         StopAllCoroutines();
+        
         for (int j = 0; j < StageData.Game[PaseCount].Line.Count; j++)
         {
+            StageData.Game[PaseCount].Line[j].SommonPos = gameObject.transform.GetChild(j);
             for (int k = 0; k < StageData.Game[PaseCount].Line[j].Enemy.Count; k++)
             {
-                StartCoroutine(Sommon(StageData.Game[PaseCount].Line[j].Enemy[k], true));
+                StartCoroutine(Sommon(StageData.Game[PaseCount].Line[j].Enemy[k], StageData.Game[PaseCount].Line[j].SommonPos, true));
             }
         }
         PaseCount++;
     }
 
-    IEnumerator Sommon(EnemyData obj, bool SommonBool = false)
+    IEnumerator Sommon(EnemyData obj, Transform pos, bool SommonBool = false)
     {
         if(SommonBool == true)
         {
@@ -83,8 +87,10 @@ public class StageManager : MonoBehaviour, IDamage
         obj.sommonCount--;
         if (obj.sommonCount >= 0)
         {
-            PoolManager.Instance.Pop(obj.Object.gameObject.name);
-            StartCoroutine(Sommon(obj));
+            GameObject objected = PoolManager.Instance.Pop(obj.Object.gameObject.name).gameObject;
+
+            objected.transform.position = pos.position;
+            StartCoroutine(Sommon(obj, pos));
         }
     }
 

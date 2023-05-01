@@ -40,8 +40,6 @@ public class LineData
 [System.Serializable]
 public class Pase
 {
-    [SerializeField] int _hp = 1000;
-    public int HP => _hp;
     public List<LineData> Line = null;
 }
 
