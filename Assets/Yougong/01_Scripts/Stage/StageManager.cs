@@ -11,7 +11,9 @@ public class StageManager : MonoBehaviour, IDamage
 
     [Header("INFO")]
     [SerializeField] float HP;
+    [SerializeField] public List<int> PasePerCent = null; 
     float MaxHP;
+    
 
    
 
@@ -44,9 +46,19 @@ public class StageManager : MonoBehaviour, IDamage
         }
     }
 
+
+
+    private void Update()
+    {
+        if(((float)HP/(float)MaxHP) * 100 <= PasePerCent[PaseCount])
+        {
+            SommonStart();
+        }
+    }
+
     void SommonStart()
     {
-
+        StopAllCoroutines();
         for (int j = 0; j < StageData.Game[PaseCount].Line.Count; j++)
         {
             for (int k = 0; k < StageData.Game[PaseCount].Line[j].Enemy.Count; k++)
