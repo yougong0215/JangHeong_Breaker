@@ -16,6 +16,7 @@ public abstract class Enemy : PoolAble, IDamage
     public Transform _target;
     public Collider[] hit;
     public EnemySetting _set;
+    public bool _isDie = false;
 
 
     [HideInInspector] public Animator _ani;
@@ -29,14 +30,18 @@ public abstract class Enemy : PoolAble, IDamage
     private IState currentState;
 
 
-    protected virtual void Awake()
+    private void Awake()
     {
+        _isDie = false;
         _currentHP = _set.MaxHp;
         _ani = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+
+        _agent.speed = _set.Speed;
         _target = GameObject.Find("Castle").transform;
         //currentState = _states[(int)EnemyState.idle];
     }
+
 
     protected virtual void Start()
     {
@@ -72,7 +77,13 @@ public abstract class Enemy : PoolAble, IDamage
 
     public void IDamage(float Damage)
     {
+        if (_isDie)
+            return;
+
         _currentHP -= Damage;
+
+        if (_currentHP <= 0)
+            _isDie = true;
     }
 
     public bool IsAttackRange()
