@@ -30,6 +30,12 @@ public abstract class Enemy : PoolAble, IDamage
     private IState currentState;
 
 
+    public override void Reset()
+    {
+        _currentHP = _set.MaxHp;
+        _isDie = false;
+        ChangeState(EnemyState.idle);
+    }
     private void Awake()
     {
         _isDie = false;
