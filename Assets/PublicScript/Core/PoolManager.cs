@@ -37,6 +37,7 @@ public class PoolManager : MonoBehaviour
     {
         Pool<PoolAble> pool = new Pool<PoolAble>(prefab, transform, cnt);
         _pools.Add(prefab.gameObject.name, pool);
+        _PoolList.Add(prefab.gameObject.GetComponent<PoolAble>());
     }
 
     public PoolAble Pop(string prefabName)
