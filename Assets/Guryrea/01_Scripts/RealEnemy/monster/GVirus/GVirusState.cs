@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EarthDragonState
+namespace GVirusState
 {
     public class Attack : IState
     {
@@ -32,7 +32,7 @@ namespace EarthDragonState
 
     public class Idle : IState
     {
-        private float _lastAttack;
+        private float _lastAttack = 0;
         public override void OnStateEnter(Enemy _enemy)
         {
             Debug.Log($"{GetType().ToString()} : idle");

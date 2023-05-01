@@ -9,7 +9,7 @@ namespace PoisionDragonState
         public override void OnStateEnter(Enemy _enemy)
         {
             Debug.Log($"{GetType().ToString()} : Attack");
-            //_enemy._ani.SetTrigger("Attack");
+            _enemy._ani.SetTrigger("Attack");
             var target = _enemy.SetTarget().GetComponent<IDamage>();
 
             if (target != null)

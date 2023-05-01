@@ -6,6 +6,6 @@ public abstract class PoolAble : MonoBehaviour
 {
     public void Reset()
     {
-        
+
     }
 }

@@ -12,7 +12,7 @@ public abstract class Enemy : PoolAble, IDamage
         attack
     };
 
-    private float _currentHP;
+    public float _currentHP;
     public Transform _target;
     public Collider[] hit;
     public EnemySetting _set;
@@ -83,7 +83,9 @@ public abstract class Enemy : PoolAble, IDamage
         _currentHP -= Damage;
 
         if (_currentHP <= 0)
-            _isDie = true;
+        {
+            OnDie();
+        }
     }
 
     public bool IsAttackRange()
@@ -126,5 +128,11 @@ public abstract class Enemy : PoolAble, IDamage
     public void LookEnemy(Transform target)
     {
         transform.LookAt(target, Vector3.up);
+    }
+
+    public void OnDie()
+    {
+        _isDie = true;
+        PoolManager.Instance.Push(this);
     }
 }
