@@ -17,6 +17,7 @@ public abstract class Enemy : PoolAble, IDamage
     public Collider[] hit;
     public EnemySetting _set;
     public bool _isDie = false;
+    protected int _whatIsEnmey;
 
 
     [HideInInspector] public Animator _ani;
@@ -45,6 +46,16 @@ public abstract class Enemy : PoolAble, IDamage
 
         _agent.speed = _set.Speed;
         _target = GameObject.Find("Castle").transform;
+
+        if (gameObject.layer == LayerMask.NameToLayer("RedTeam"))
+        {
+            _whatIsEnmey = 1 << LayerMask.NameToLayer("BlueTeam");
+        }
+        else if (gameObject.layer == LayerMask.NameToLayer("BlueTeam"))
+        {
+            _whatIsEnmey = 1 << LayerMask.NameToLayer("RedTeam");
+        }
+
         //currentState = _states[(int)EnemyState.idle];
     }
 
@@ -96,8 +107,9 @@ public abstract class Enemy : PoolAble, IDamage
 
     public bool IsAttackRange()
     {
+        hit = null;
         // 현재 위치에서 공격 가능한 범위 내에 있는 대상들을 저장
-        hit = Physics.OverlapSphere(transform.position, _set.Range, _set._enemyLay);
+        hit = Physics.OverlapSphere(transform.position, _set.Range, _whatIsEnmey);
         // 대상이 없을 경우 true 반환
         return hit.Length > 0;
     }
@@ -128,7 +140,10 @@ public abstract class Enemy : PoolAble, IDamage
 
     public void AgentGo()
     {
-        _agent.SetDestination(_target.position);
+        hit = null;
+
+        hit = Physics.OverlapSphere(transform.position, float.MaxValue, _whatIsEnmey);
+        _agent.SetDestination(SetTarget().position);
     }
 
     public void LookEnemy(Transform target)

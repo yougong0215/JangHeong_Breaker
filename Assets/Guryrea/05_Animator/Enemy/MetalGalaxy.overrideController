@@ -9,8 +9,6 @@ AnimatorOverrideController:
   m_Name: MetalGalaxy
   m_Controller: {fileID: 9100000, guid: 4c7fe8e1a3919c549a79a706afefd1ce, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: -7880898593064695190, guid: 83e28e7ec15604e4e936c71d31a7ebad, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: f963cdf359d14ab45bc2d03df00ac2f3, type: 3}
   - m_OriginalClip: {fileID: 7831638795069683802, guid: 248146b68218df34c9ed1a14ba7a443b, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: 21a805ef27ad7ef42904fff42be01ba6, type: 3}
   - m_OriginalClip: {fileID: 190365492218098281, guid: b4ed12fcea5716a4b88a664cf716cfc6, type: 3}
