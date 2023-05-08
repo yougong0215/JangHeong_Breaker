@@ -36,6 +36,14 @@ public abstract class Enemy : PoolAble, IDamage
         _currentHP = _set.MaxHp;
         _isDie = false;
         ChangeState(EnemyState.idle);
+        if (gameObject.layer == LayerMask.NameToLayer("RedTeam"))
+        {
+            _whatIsEnmey = 1 << LayerMask.NameToLayer("BlueTeam");
+        }
+        else if (gameObject.layer == LayerMask.NameToLayer("BlueTeam"))
+        {
+            _whatIsEnmey = 1 << LayerMask.NameToLayer("RedTeam");
+        }
     }
     private void Awake()
     {
@@ -45,7 +53,7 @@ public abstract class Enemy : PoolAble, IDamage
         _agent = GetComponent<NavMeshAgent>();
 
         _agent.speed = _set.Speed;
-        _target = GameObject.Find("Castle").transform;
+        //_target = GameObject.Find("Castle").transform;
 
         if (gameObject.layer == LayerMask.NameToLayer("RedTeam"))
         {
@@ -154,6 +162,7 @@ public abstract class Enemy : PoolAble, IDamage
     public void OnDie()
     {
         _isDie = true;
+        //gameObject.SetActive(false);
         PoolManager.Instance.Push(this);
     }
 }
