@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageManager : MonoBehaviour, IDamage
+public class StageEnemyCastleManager : MonoBehaviour, IDamage
 {
     
 
@@ -11,7 +11,8 @@ public class StageManager : MonoBehaviour, IDamage
 
     [Header("INFO")]
     [SerializeField] float HP;
-    [SerializeField] public List<int> PasePerCent = null; 
+    [SerializeField] public List<int> PasePerCent = null;
+    [SerializeField] LayerMask Enemy;
     float MaxHP;
     
 
@@ -24,10 +25,6 @@ public class StageManager : MonoBehaviour, IDamage
     public void IDamage(float Damage)
     {
         HP -= Damage;
-        // 10000
-        // 3000
-
-        // 3/10 * 100 => 30%
     }
 
     private void Awake()
@@ -40,7 +37,7 @@ public class StageManager : MonoBehaviour, IDamage
             {
                 for (int k = 0; k < StageData.Game[i].Line[j].Enemy.Count; k++)
                 {
-                    PoolManager.Instance.CreatePool(StageData.Game[i].Line[j].Enemy[k].Object, 5);
+                    PoolManager.Instance.CreatePool(StageData.Game[i].Line[j].Enemy[k].Object, 5, true);
                 }
             }
         }
@@ -88,6 +85,8 @@ public class StageManager : MonoBehaviour, IDamage
         if (obj.sommonCount >= 0)
         {
             GameObject objected = PoolManager.Instance.Pop(obj.Object.gameObject.name).gameObject;
+
+            objected.gameObject.layer = Enemy;
 
             objected.transform.position = pos.position;
             StartCoroutine(Sommon(obj, pos));

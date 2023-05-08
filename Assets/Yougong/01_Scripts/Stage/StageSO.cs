@@ -25,8 +25,7 @@ public class EnemyData
     [Header("SommonTime")]
     public int FirstTime;
     [Header("SommonArr")]
-    public int sommonCount; 
-    
+    public int sommonCount;
     
 }
 
@@ -44,7 +43,7 @@ public class Pase
 }
 
 
-[CreateAssetMenu (fileName = "SO/StageData")]
+[CreateAssetMenu (menuName = "SO/StageData")]
 public class StageSO : ScriptableObject
 {
 
