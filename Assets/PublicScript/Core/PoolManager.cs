@@ -33,11 +33,12 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public void CreatePool(PoolAble prefab, int cnt = 5)
+    public void CreatePool(PoolAble prefab, int cnt = 5, bool b = false)
     {
         Pool<PoolAble> pool = new Pool<PoolAble>(prefab, transform, cnt);
         _pools.Add(prefab.gameObject.name, pool);
-        _PoolList.Add(prefab.gameObject.GetComponent<PoolAble>());
+        //if(b==true)
+            //_PoolList.Add(prefab.gameObject.GetComponent<PoolAble>());
     }
 
     public PoolAble Pop(string prefabName)
