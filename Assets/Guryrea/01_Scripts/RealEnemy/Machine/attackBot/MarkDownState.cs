@@ -1,31 +1,21 @@
-using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MimimicState
+namespace MarkDownState
 {
+    // Start is called before the first frame update
     public class Attack : IState
     {
-        public int killcount = 0;
         public override void OnStateEnter(Enemy _enemy)
         {
             Debug.Log($"{GetType().ToString()} : Attack");
-            _enemy._ani.SetTrigger("Attack");
-            var target = _enemy.SetTarget()?.GetComponent<IDamage>();
+            //_enemy._ani.SetTrigger("Attack");
+            var target = _enemy.SetTarget().GetComponent<IDamage>();
 
-            if (target != null && !_enemy.SetTarget().GetComponent<Enemy>()._isDie)
+            if (target != null)
             {
                 target.IDamage(_enemy._set.Damage);
-                if (_enemy.SetTarget().GetComponent<Enemy>()._isDie)
-                {
-                    killcount++;
-
-                    foreach (Collider _co in _enemy.hit)
-                    {
-                        _co?.GetComponent<IDamage>().IDamage(10 * killcount);
-                    }
-                }
             }
             _enemy.ChangeState(Enemy.EnemyState.idle);
         }
@@ -47,7 +37,7 @@ namespace MimimicState
         public override void OnStateEnter(Enemy _enemy)
         {
             Debug.Log($"{GetType().ToString()} : idle");
-            _enemy._ani.SetBool("move", false);
+            //_enemy._ani.SetBool("move", false);
             _enemy.AgentStop();
         }
 
@@ -75,7 +65,7 @@ namespace MimimicState
         {
             Debug.Log($"{GetType().ToString()} : move");
 
-            _enemy._ani.SetBool("move", true);
+            //_enemy._ani.SetBool("move", true);
             _enemy.AgentGo();
         }
 

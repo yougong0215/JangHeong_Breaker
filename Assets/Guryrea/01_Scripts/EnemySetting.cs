@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySetting : ScriptableObject
 {
     public UnitType unitType;
-    public LayerMask _enemyLay;
+    //public LayerMask _enemyLay;
     public float MaxHp;
     public float Ammor;
     public float Speed;

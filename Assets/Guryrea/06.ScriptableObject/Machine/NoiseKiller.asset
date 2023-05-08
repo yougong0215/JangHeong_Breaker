@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0353c68966288140a2f0b2bbf3c12ce, type: 3}
-  m_Name: Mimimic
+  m_Name: NoiseKiller
   m_EditorClassIdentifier: 
-  unitType: 3
+  unitType: 2
   _enemyLay:
     serializedVersion: 2
     m_Bits: 8
-  MaxHp: 80
+  MaxHp: 6
   Ammor: 0
-  Speed: 4
-  Damage: 20
-  AttackCooltime: 0.3
-  Range: 1
-  Cost: 4
+  Speed: 3
+  Damage: 28
+  AttackCooltime: 0.58
+  Range: 6
+  Cost: 5
   Combatpower: 0

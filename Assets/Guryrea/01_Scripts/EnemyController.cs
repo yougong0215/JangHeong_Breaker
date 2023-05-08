@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour, IDamage
     private bool IsAttackRange()
     {
         // 현재 위치에서 공격 가능한 범위 내에 있는 대상들을 저장
-        hit = Physics.OverlapSphere(transform.position, _base._data.Range, _base._data._enemyLay);
+        // hit = Physics.OverlapSphere(transform.position, _base._data.Range, _base._data._enemyLay);
         // 대상이 없을 경우 true 반환
         return hit.Length > 0;
     }
