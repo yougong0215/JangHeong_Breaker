@@ -86,6 +86,9 @@ namespace MimimicState
 
         public override void OnStateUpdate(Enemy _enemy)
         {
+            _enemy._ani.SetBool("move", true);
+            _enemy.AgentGo();
+
             if (_enemy.IsAttackRange())
                 _enemy.ChangeState(Enemy.EnemyState.idle);
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,9 +34,9 @@ public abstract class Enemy : PoolAble, IDamage
 
     public override void Reset()
     {
+
         _currentHP = _set.MaxHp;
         _isDie = false;
-        ChangeState(EnemyState.idle);
         if (gameObject.layer == LayerMask.NameToLayer("RedTeam"))
         {
             _whatIsEnmey = 1 << LayerMask.NameToLayer("BlueTeam");
@@ -44,9 +45,12 @@ public abstract class Enemy : PoolAble, IDamage
         {
             _whatIsEnmey = 1 << LayerMask.NameToLayer("RedTeam");
         }
+
+        currentState = _states[(int)EnemyState.idle];
     }
-    private void Awake()
+    protected virtual void Awake()
     {
+        //ChangeState(EnemyState.idle);
         _isDie = false;
         _currentHP = _set.MaxHp;
         _ani = GetComponent<Animator>();
@@ -70,6 +74,7 @@ public abstract class Enemy : PoolAble, IDamage
 
     protected virtual void Start()
     {
+        currentState = _states[(int)EnemyState.idle];
     }
 
     public void Update()
@@ -137,7 +142,9 @@ public abstract class Enemy : PoolAble, IDamage
                 target = hit[i].transform;
             }
         }
+
         // 가장 가까운 대상 반환
+        Debug.Log(">>>>");
         return target;
     }
 
@@ -148,6 +155,7 @@ public abstract class Enemy : PoolAble, IDamage
 
     public void AgentGo()
     {
+        Debug.Log("GO");
         hit = null;
 
         hit = Physics.OverlapSphere(transform.position, float.MaxValue, _whatIsEnmey);

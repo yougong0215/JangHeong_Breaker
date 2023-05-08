@@ -36,16 +36,18 @@ public class PoolManager : MonoBehaviour
     public void CreatePool(PoolAble prefab, int cnt = 5, bool b = false)
     {
         Pool<PoolAble> pool = new Pool<PoolAble>(prefab, transform, cnt);
-        _pools.Add(prefab.gameObject.name, pool);
+
+        if (_pools.ContainsKey(prefab.gameObject.name) == false)
+            _pools.Add(prefab.gameObject.name, pool);
         //if(b==true)
-            //_PoolList.Add(prefab.gameObject.GetComponent<PoolAble>());
+        //_PoolList.Add(prefab.gameObject.GetComponent<PoolAble>());
     }
 
     public PoolAble Pop(string prefabName)
     {
         if (_pools.ContainsKey(prefabName) == false)
         {
-            Debug.LogError("ÇÁ¸®Æé¾øµ¥");
+            Debug.LogError("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             return null;
         }
 
@@ -69,12 +71,12 @@ public class PoolManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ÇÁ¸®Æé¾øµ¥..");
+            Debug.LogError("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..");
         }
-        
-        for(int i =0; i < transform.childCount; i++)
+
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).gameObject.name == prefabName)
+            if (transform.GetChild(i).gameObject.name == prefabName)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }

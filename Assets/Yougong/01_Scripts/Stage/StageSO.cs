@@ -26,7 +26,7 @@ public class EnemyData
     public int FirstTime;
     [Header("SommonArr")]
     public int sommonCount;
-    
+
 }
 
 [System.Serializable]
@@ -43,7 +43,7 @@ public class Pase
 }
 
 
-[CreateAssetMenu (menuName = "SO/StageData")]
+[CreateAssetMenu(menuName = "SO/StageData")]
 public class StageSO : ScriptableObject
 {
 

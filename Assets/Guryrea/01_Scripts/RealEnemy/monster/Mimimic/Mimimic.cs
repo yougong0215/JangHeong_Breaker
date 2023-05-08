@@ -5,9 +5,9 @@ using UnityEngine;
 public class Mimimic : Enemy
 {
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         _states = new IState[3];
         _states[(int)EnemyState.idle] = new MimimicState.Idle();
         _states[(int)EnemyState.move] = new MimimicState.Move();

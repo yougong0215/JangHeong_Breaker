@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageEnemyCastleManager : MonoBehaviour, IDamage
 {
-    
+
 
     [SerializeField] public StageSO StageData = null;
     [SerializeField] public int PaseCount = 0;
@@ -14,9 +14,9 @@ public class StageEnemyCastleManager : MonoBehaviour, IDamage
     [SerializeField] public List<int> PasePerCent = null;
     [SerializeField] LayerMask Enemy;
     float MaxHP;
-    
 
-   
+
+
 
 
 
@@ -31,13 +31,16 @@ public class StageEnemyCastleManager : MonoBehaviour, IDamage
     {
         MaxHP = HP;
 
-        for(int i =0; i < StageData.Game.Count; i++)
+        for (int i = 0; i < StageData.Game.Count; i++)
         {
             for (int j = 0; j < StageData.Game[i].Line.Count; j++)
             {
                 for (int k = 0; k < StageData.Game[i].Line[j].Enemy.Count; k++)
                 {
+                    Debug.Log(StageData.Game[i].Line[j].Enemy[k].Object);
+
                     PoolManager.Instance.CreatePool(StageData.Game[i].Line[j].Enemy[k].Object, 5, true);
+
                 }
             }
         }
@@ -49,16 +52,16 @@ public class StageEnemyCastleManager : MonoBehaviour, IDamage
 
     private void Update()
     {
-        if(((float)HP/(float)MaxHP) * 100 <= PasePerCent[PaseCount-1])
+        //if (((float)HP / (float)MaxHP) * 100 <= PasePerCent[PaseCount - 1])
         {
-            SommonStart();
+            //SommonStart();
         }
     }
 
     void SommonStart()
     {
         StopAllCoroutines();
-        
+
         for (int j = 0; j < StageData.Game[PaseCount].Line.Count; j++)
         {
             StageData.Game[PaseCount].Line[j].SommonPos = gameObject.transform.GetChild(j);
@@ -72,7 +75,7 @@ public class StageEnemyCastleManager : MonoBehaviour, IDamage
 
     IEnumerator Sommon(EnemyData obj, Transform pos, bool SommonBool = false)
     {
-        if(SommonBool == true)
+        if (SommonBool == true)
         {
             yield return new WaitForSeconds(obj.FirstTime);
         }
@@ -86,11 +89,11 @@ public class StageEnemyCastleManager : MonoBehaviour, IDamage
         {
             GameObject objected = PoolManager.Instance.Pop(obj.Object.gameObject.name).gameObject;
 
-            objected.gameObject.layer = Enemy;
+            objected.gameObject.layer = gameObject.layer;
 
             objected.transform.position = pos.position;
             StartCoroutine(Sommon(obj, pos));
         }
     }
 
-}       
+}
