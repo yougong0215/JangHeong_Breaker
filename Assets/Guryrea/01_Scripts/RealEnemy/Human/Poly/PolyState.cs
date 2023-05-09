@@ -9,9 +9,12 @@ namespace PolyState
     {
         public override void OnStateEnter(Enemy _enemy)
         {
-            Debug.Log("Poly : Attack");
+            Debug.Log($"{GetType().ToString()} : Attack");
             _enemy._ani.SetTrigger("Attack");
+
+
             var target = _enemy.SetTarget().GetComponent<IDamage>();
+            _enemy.LookEnemy(_enemy.SetTarget());
 
             if (target != null)
             {
@@ -31,13 +34,13 @@ namespace PolyState
         }
     }
 
-    public class idle : IState
+    public class Idle : IState
     {
         private float _lastAttack;
         public override void OnStateEnter(Enemy _enemy)
         {
-            Debug.Log("Poly : idle");
-            _enemy._ani.SetBool("IsRange", false);
+            Debug.Log($"{GetType().ToString()} : idle");
+            _enemy._ani.SetBool("move", false);
             _enemy.AgentStop();
         }
 
@@ -59,13 +62,13 @@ namespace PolyState
         }
     }
 
-    public class move : IState
+    public class Move : IState
     {
         public override void OnStateEnter(Enemy _enemy)
         {
-            Debug.Log("Poly : move");
+            Debug.Log($"{GetType().ToString()} : move");
 
-            _enemy._ani.SetBool("IsRange", true);
+            _enemy._ani.SetBool("move", true);
             _enemy.AgentGo();
         }
 
