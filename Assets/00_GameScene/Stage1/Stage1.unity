@@ -6702,6 +6702,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PoolList:
   - {fileID: 1637889360303141715, guid: 7494ec7ae1151964d88746d640649d70, type: 3}
+  - {fileID: 3705415288611506847, guid: 9e26a08f87f91ba4988d83959dee6b73, type: 3}
+  - {fileID: 7626674363814883304, guid: 6fbdcbb19790d3b44b7cd9410fccd5ba, type: 3}
 --- !u!4 &1025826361
 Transform:
   m_ObjectHideFlags: 0

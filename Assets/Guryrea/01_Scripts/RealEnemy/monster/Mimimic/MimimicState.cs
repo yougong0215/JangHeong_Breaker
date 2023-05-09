@@ -5,29 +5,40 @@ using UnityEngine;
 
 namespace MimimicState
 {
+    public class MimimicState : MonoBehaviour
+    {
+        public int killcount = 0;
+
+
+
+    }
+
     public class Attack : IState
     {
+        MimimicState mimimicState = new MimimicState();
         public int killcount = 0;
         public override void OnStateEnter(Enemy _enemy)
         {
+            //mimimicState.waitStart(_enemy);
+            CoroutineHelper.StartCoroutine(WaitTime(_enemy));
             Debug.Log($"{GetType().ToString()} : Attack");
-            _enemy._ani.SetTrigger("Attack");
-            var target = _enemy.SetTarget()?.GetComponent<IDamage>();
+            // _enemy._ani.SetTrigger("Attack");
+            // var target = _enemy.SetTarget()?.GetComponent<IDamage>();
 
-            if (target != null && !_enemy.SetTarget().GetComponent<Enemy>()._isDie)
-            {
-                target.IDamage(_enemy._set.Damage);
-                if (_enemy.SetTarget().GetComponent<Enemy>()._isDie)
-                {
-                    killcount++;
+            // if (target != null && !_enemy.SetTarget().GetComponent<Enemy>()._isDie)
+            // {
+            //     target?.IDamage(_enemy._set.Damage);
+            //     if (_enemy.SetTarget().GetComponent<Enemy>()._isDie)
+            //     {
+            //         killcount++;
 
-                    foreach (Collider _co in _enemy.hit)
-                    {
-                        _co?.GetComponent<IDamage>().IDamage(10 * killcount);
-                    }
-                }
-            }
-            _enemy.ChangeState(Enemy.EnemyState.idle);
+            //         foreach (Collider _co in _enemy.hit)
+            //         {
+            //             _co?.GetComponent<IDamage>().IDamage(10 * killcount);
+            //         }
+            //     }
+            // }
+            // _enemy.ChangeState(Enemy.EnemyState.idle);
         }
 
         public override void OnStateExit(Enemy _enemy)
@@ -39,6 +50,32 @@ namespace MimimicState
         {
 
         }
+
+        IEnumerator WaitTime(Enemy _enemy)
+        {
+            _enemy._ani.SetTrigger("Attack");
+            var target = _enemy.SetTarget()?.GetComponent<IDamage>();
+
+            yield return new WaitForSeconds(0.1f);
+
+            //!_enemy.SetTarget().GetComponent<Enemy>()._isDie
+            if (target != null)
+            {
+                target?.IDamage(_enemy._set.Damage);
+                if (_enemy.SetTarget().GetComponent<Enemy>()._isDie)
+                {
+                    killcount++;
+
+                    foreach (Collider _co in _enemy.hit)
+                    {
+                        _co?.GetComponent<IDamage>().IDamage(10 * killcount);
+                    }
+                }
+            }
+            yield return new WaitForSeconds(0.1f);
+            _enemy.ChangeState(Enemy.EnemyState.idle);
+        }
+
     }
 
     public class Idle : IState

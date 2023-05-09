@@ -46,7 +46,7 @@ public abstract class Enemy : PoolAble, IDamage
             _whatIsEnmey = 1 << LayerMask.NameToLayer("RedTeam");
         }
 
-        currentState = _states[(int)EnemyState.idle];
+        //currentState = _states[(int)EnemyState.idle];
     }
     protected virtual void Awake()
     {
@@ -59,6 +59,13 @@ public abstract class Enemy : PoolAble, IDamage
         _agent.speed = _set.Speed;
         //_target = GameObject.Find("Castle").transform;
 
+
+        //currentState = _states[(int)EnemyState.idle];
+    }
+
+
+    protected virtual void Start()
+    {
         if (gameObject.layer == LayerMask.NameToLayer("RedTeam"))
         {
             _whatIsEnmey = 1 << LayerMask.NameToLayer("BlueTeam");
@@ -67,13 +74,6 @@ public abstract class Enemy : PoolAble, IDamage
         {
             _whatIsEnmey = 1 << LayerMask.NameToLayer("RedTeam");
         }
-
-        //currentState = _states[(int)EnemyState.idle];
-    }
-
-
-    protected virtual void Start()
-    {
         currentState = _states[(int)EnemyState.idle];
     }
 
@@ -111,6 +111,9 @@ public abstract class Enemy : PoolAble, IDamage
             return;
 
         _currentHP -= Damage;
+
+        PopupText text = PoolManager.Instance.Pop("PopUpText") as PopupText;
+        text.SetUp(Damage.ToString(), transform.position, Color.red);
 
         if (_currentHP <= 0)
         {
@@ -150,7 +153,9 @@ public abstract class Enemy : PoolAble, IDamage
 
     public void AgentStop()
     {
-        _agent.SetDestination(transform.position);
+        if (gameObject.activeSelf == true)
+            _agent.ResetPath();
+        //_agent.SetDestination(transform.position);
     }
 
     public void AgentGo()

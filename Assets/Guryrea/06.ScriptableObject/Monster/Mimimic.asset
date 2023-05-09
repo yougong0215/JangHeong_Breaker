@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: Mimimic
   m_EditorClassIdentifier: 
   unitType: 3
-  _enemyLay:
-    serializedVersion: 2
-    m_Bits: 8
   MaxHp: 80
   Ammor: 0
   Speed: 4
   Damage: 20
-  AttackCooltime: 0.3
+  AttackCooltime: 0.7
   Range: 1
   Cost: 4
   Combatpower: 0
