@@ -768,7 +768,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeavyRoader
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 157488641080055586, guid: f213bb2ca63894742ba5a1d48dd58a4d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f213bb2ca63894742ba5a1d48dd58a4d, type: 3}
 --- !u!1001 &1490035679
 PrefabInstance:

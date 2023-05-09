@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835ae5a96dbe0e649b0b1f10598308c2, type: 3}
+  m_Name: GreatTree'sTomb
+  m_EditorClassIdentifier: 
+  mapName: GreatTree'sTomb
+  mapInfo: "\uAC70\uB300\uB098\uBB34\uBB34\uB364"
+  MapPrefab: {fileID: 8343350732591585059, guid: b092f10d623b70a46b77b153bc1569c9, type: 3}
+  MapPos: {x: -117, y: 143, z: 65}
+  movePos: {x: -123, y: 8, z: 125}
+  map: 1
