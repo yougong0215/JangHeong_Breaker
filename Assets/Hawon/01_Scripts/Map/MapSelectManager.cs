@@ -66,7 +66,7 @@ public class MapSelectManager : MonoBehaviour
             Camera.main.transform.DOMove(pos, 1);
             _player.transform.DOMove(pPos, 1.5f);
         }
-        StartCoroutine(Delay(num));   
+        //StartCoroutine(Delay(num));   
     }
 
     IEnumerator Delay(int num)
